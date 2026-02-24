@@ -40,6 +40,15 @@ def main(page: ft.Page):
     # 2. File Picker
     def pick_files_result(e: ft.FilePickerResultEvent):
         if e.files:
+            # In web mode, we need to upload the file first or handle it differently.
+            # However, for simplicity in this MVP, we assume local or standard behavior.
+            # If path is None (common in web), we show a warning.
+            if not e.files[0].path:
+                page.snack_bar = ft.SnackBar(ft.Text("Web upload not fully implemented in this MVP. Please run locally for full features."))
+                page.snack_bar.open = True
+                page.update()
+                return
+
             file_path = e.files[0].path
             state["file_path"] = file_path
             selected_file_text.value = f"Selected: {e.files[0].name}"
