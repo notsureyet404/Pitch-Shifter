@@ -1,0 +1,6 @@
+flet
+librosa
+pedalboard
+soundfile
+numpy
+pytest
